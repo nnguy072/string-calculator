@@ -1,5 +1,6 @@
 ﻿namespace string_calculator
 {
+    using string_calculator.Exceptions;
     using string_calculator.Services;
     using System;
 
@@ -26,6 +27,10 @@
                     var result = calculator.Calculate(userInput);
 
                     Console.WriteLine($"{ResultPrompt}{result}\n");
+                }
+                catch (NegativeNumbersException e)
+                {
+                    Console.WriteLine(e.Message);
                 }
                 catch (Exception e)
                 {

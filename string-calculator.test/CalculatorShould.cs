@@ -1,12 +1,15 @@
 namespace string_calculator.test
 {
+    using string_calculator.Exceptions;
     using string_calculator.Services.Operations;
     using string_calculator.Services.Parsers;
     using System;
+    using System.Collections.Generic;
     using Xunit;
 
     public class CalculatorShould
     {
+        #region -- Step 1 --
         [Fact]
         public void AddTwoNumbers()
         {
@@ -124,7 +127,9 @@ namespace string_calculator.test
                 throw;
             }
         }
+        #endregion
 
+        #region -- Step 2 --
         [Fact]
         public void AddMoreThanTwoNumbers()
         {
@@ -142,7 +147,9 @@ namespace string_calculator.test
                 Assert.False(true);
             }
         }
+        #endregion
 
+        #region -- Step 3 --
         [Fact]
         public void AllowNewlineAsDelimiter()
         {
@@ -160,5 +167,48 @@ namespace string_calculator.test
                 Assert.False(true);
             }
         }
+
+        [Fact]
+        public void AllowNewlineAsDelimiterEmptyString()
+        {
+            var testInput = "\n";
+
+            try
+            {
+                var parsedNumbers = new UnlimitedNumberParser().Parse(testInput);
+                var result = new AddOperation().Evaluate(parsedNumbers);
+
+                Assert.Equal(0, result);
+            }
+            catch (Exception)
+            {
+                Assert.False(true);
+            }
+        }
+        #endregion
+
+        #region -- Step 4 --
+        [Fact]
+        public void ShouldDenyNegativeNumbersByThrowingException()
+        {
+            var testInput = "4,-3";
+
+            try
+            {
+                var parsedNumbers = new UnlimitedNumberParser().Parse(testInput);
+                var result = new AddOperation().Evaluate(parsedNumbers);
+
+                Assert.True(false);
+            }
+            catch (NegativeNumbersException e)
+            {
+                Assert.Contains(-3, e.NegativeNumbers);
+            }
+            catch (Exception)
+            {
+                Assert.True(false);
+            }
+        }
+        #endregion
     }
 }
