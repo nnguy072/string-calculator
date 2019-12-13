@@ -1,6 +1,5 @@
 namespace string_calculator.test
 {
-    using string_calculator.Exceptions;
     using string_calculator.Services.Operations;
     using string_calculator.Services.Parsers;
     using System;
@@ -127,20 +126,20 @@ namespace string_calculator.test
         }
 
         [Fact]
-        public void ThrowExceptionIfMoreThanTwoNumbers()
+        public void AddMoreThanTwoNumbers()
         {
-            var testInput = "1,2,3";
+            var testInput = "1,2,3,4,5,6,7,8,9,10,11,12";
 
             try
             {
-                var parsedNumbers = new TwoNumberParser().Parse(testInput);
+                var parsedNumbers = new UnlimitedNumberParser().Parse(testInput);
                 var result = new AddOperation().Evaluate(parsedNumbers);
 
-                Assert.False(true);
+                Assert.Equal(78, result);
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Assert.True(e is MoreThanTwoNumbersException);
+                Assert.False(true);
             }
         }
     }
