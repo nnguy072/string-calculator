@@ -142,5 +142,23 @@ namespace string_calculator.test
                 Assert.False(true);
             }
         }
+
+        [Fact]
+        public void AllowNewlineAsDelimiter()
+        {
+            var testInput = "1\n2,3";
+
+            try
+            {
+                var parsedNumbers = new UnlimitedNumberParser().Parse(testInput);
+                var result = new AddOperation().Evaluate(parsedNumbers);
+
+                Assert.Equal(6, result);
+            }
+            catch (Exception)
+            {
+                Assert.False(true);
+            }
+        }
     }
 }

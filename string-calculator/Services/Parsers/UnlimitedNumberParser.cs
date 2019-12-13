@@ -10,8 +10,8 @@
         {
             if (string.IsNullOrWhiteSpace(stringToParse))
                 return new List<int>();
-
-            var parsedNumbers = stringToParse.Split(',').Select(o => o.ConvertToInt());
+            
+            var parsedNumbers = stringToParse.Split(new char[] { ',', '\n' }).Select(o => o.ConvertToInt());
 
             return parsedNumbers;
         }
