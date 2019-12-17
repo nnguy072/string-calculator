@@ -1,10 +1,10 @@
 namespace string_calculator.test
 {
     using string_calculator.Exceptions;
+    using string_calculator.Services;
     using string_calculator.Services.Operations;
     using string_calculator.Services.Parsers;
     using System;
-    using System.Collections.Generic;
     using Xunit;
 
     public class CalculatorShould
@@ -17,28 +17,10 @@ namespace string_calculator.test
 
             try
             {
-                var parsedNumbers = new TwoNumberParser().Parse(testInput);
-                var result = new AddOperation().Evaluate(parsedNumbers);
+                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as Calculator;
+                var result = calculator.Calculate(testInput);
 
                 Assert.Equal(501, result);
-            }
-            catch (Exception)
-            {
-                Assert.True(false);
-            }
-        }
-
-        [Fact]
-        public void AddNegativeValues()
-        {
-            var testInput = "4,-3";
-
-            try
-            {
-                var parsedNumbers = new TwoNumberParser().Parse(testInput);
-                var result = new AddOperation().Evaluate(parsedNumbers);
-
-                Assert.Equal(1, result);
             }
             catch (Exception)
             {
@@ -53,8 +35,8 @@ namespace string_calculator.test
 
             try
             {
-                var parsedNumbers = new TwoNumberParser().Parse(testInput);
-                var result = new AddOperation().Evaluate(parsedNumbers);
+                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as Calculator;
+                var result = calculator.Calculate(testInput);
 
                 Assert.Equal(4, result);
             }
@@ -71,8 +53,8 @@ namespace string_calculator.test
 
             try
             {
-                var parsedNumbers = new TwoNumberParser().Parse(testInput);
-                var result = new AddOperation().Evaluate(parsedNumbers);
+                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as Calculator;
+                var result = calculator.Calculate(testInput);
 
                 Assert.Equal(0, result);
             }
@@ -90,11 +72,9 @@ namespace string_calculator.test
 
             try
             {
-                var parsedNumbers = new TwoNumberParser().Parse(testInput);
-                var result = new AddOperation().Evaluate(parsedNumbers);
-
-                var parsedNumbers2 = new TwoNumberParser().Parse(testInput2);
-                var result2 = new AddOperation().Evaluate(parsedNumbers2);
+                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as Calculator;
+                var result = calculator.Calculate(testInput);
+                var result2 = calculator.Calculate(testInput2);
 
                 Assert.Equal(5, result);
                 Assert.Equal(5, result2);
@@ -113,13 +93,11 @@ namespace string_calculator.test
 
             try
             {
-                var parsedNumbers1 = new TwoNumberParser().Parse(testInput);
-                var result1 = new AddOperation().Evaluate(parsedNumbers1);
+                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as Calculator;
+                var result = calculator.Calculate(testInput);
+                var result2 = calculator.Calculate(testInput2);
 
-                var parsedNumbers2 = new TwoNumberParser().Parse(testInput2);
-                var result2 = new AddOperation().Evaluate(parsedNumbers2);
-
-                Assert.Equal(5, result1);
+                Assert.Equal(5, result);
                 Assert.Equal(5, result2);
             }
             catch (Exception)
@@ -137,8 +115,8 @@ namespace string_calculator.test
 
             try
             {
-                var parsedNumbers = new UnlimitedNumberParser().Parse(testInput);
-                var result = new AddOperation().Evaluate(parsedNumbers);
+                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as Calculator;
+                var result = calculator.Calculate(testInput);
 
                 Assert.Equal(78, result);
             }
@@ -157,8 +135,8 @@ namespace string_calculator.test
 
             try
             {
-                var parsedNumbers = new UnlimitedNumberParser().Parse(testInput);
-                var result = new AddOperation().Evaluate(parsedNumbers);
+                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as Calculator;
+                var result = calculator.Calculate(testInput);
 
                 Assert.Equal(6, result);
             }
@@ -175,8 +153,8 @@ namespace string_calculator.test
 
             try
             {
-                var parsedNumbers = new UnlimitedNumberParser().Parse(testInput);
-                var result = new AddOperation().Evaluate(parsedNumbers);
+                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as Calculator;
+                var result = calculator.Calculate(testInput);
 
                 Assert.Equal(0, result);
             }
@@ -195,8 +173,8 @@ namespace string_calculator.test
 
             try
             {
-                var parsedNumbers = new UnlimitedNumberParser().Parse(testInput);
-                var result = new AddOperation().Evaluate(parsedNumbers);
+                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as Calculator;
+                var result = calculator.Calculate(testInput);
 
                 Assert.True(false);
             }
@@ -219,8 +197,8 @@ namespace string_calculator.test
 
             try
             {
-                var parsedNumbers = new UnlimitedNumberParser().Parse(testInput);
-                var result = new AddOperation().Evaluate(parsedNumbers);
+                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as Calculator;
+                var result = calculator.Calculate(testInput);
 
                 Assert.Equal(8, result);
             }
@@ -239,10 +217,30 @@ namespace string_calculator.test
 
             try
             {
-                var parsedNumbers = new CustomDelimiterSingleCharacter().Parse(testInput);
-                var result = new AddOperation().Evaluate(parsedNumbers);
+                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as Calculator;
+                var result = calculator.Calculate(testInput);
 
                 Assert.Equal(7, result);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        #endregion
+
+        #region -- step 7 --
+        [Fact]
+        public void SupportCustomDelimiterOfAnyLength()
+        {
+            var testInput = "//[***]\n11***22***33";
+
+            try
+            {
+                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as Calculator;
+                var result = calculator.Calculate(testInput);
+
+                Assert.Equal(66, result);
             }
             catch (Exception)
             {

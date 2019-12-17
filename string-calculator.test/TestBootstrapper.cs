@@ -1,4 +1,4 @@
-﻿namespace string_calculator
+﻿namespace string_calculator.test
 {
     using Microsoft.Extensions.DependencyInjection;
     using string_calculator.Services;
@@ -6,11 +6,11 @@
     using string_calculator.Services.Parsers;
     using System;
 
-    public static class Bootstrapper
+    public static class TestBootstrapper
     {
         public static readonly IServiceProvider ServiceProvider;
 
-        static Bootstrapper()
+        static TestBootstrapper()
         {
             var services = new ServiceCollection();
 

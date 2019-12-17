@@ -2,7 +2,6 @@
 {
     using string_calculator.Exceptions;
     using string_calculator.Extensions;
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text.RegularExpressions;
@@ -44,7 +43,10 @@
 
         private char ParseDelimiter(string stringToParse, out string stringToParseWithoutDelimiter)
         {
-            var regex = new Regex(@"\A//\S\n");
+            // \A == starts with 
+            // .  == any character except \n
+            // \n == newline
+            var regex = new Regex(@"\A//.\n");
             var match = regex.Match(stringToParse);
 
             if (match.Success)
