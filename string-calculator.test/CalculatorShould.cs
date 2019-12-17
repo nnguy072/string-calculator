@@ -189,7 +189,7 @@ namespace string_calculator.test
 
         #region -- Step 4 --
         [Fact]
-        public void ShouldDenyNegativeNumbersByThrowingException()
+        public void DenyNegativeNumbersByThrowingException()
         {
             var testInput = "4,-3";
 
@@ -223,6 +223,26 @@ namespace string_calculator.test
                 var result = new AddOperation().Evaluate(parsedNumbers);
 
                 Assert.Equal(8, result);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        #endregion
+
+        #region -- step 6 --
+        [Fact]
+        public void SupportCustomDelimiterOfSingleCharacter()
+        {
+            var testInput = "//#\n2#5";
+
+            try
+            {
+                var parsedNumbers = new CustomDelimiterSingleCharacter().Parse(testInput);
+                var result = new AddOperation().Evaluate(parsedNumbers);
+
+                Assert.Equal(7, result);
             }
             catch (Exception)
             {

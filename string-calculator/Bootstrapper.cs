@@ -20,9 +20,9 @@
 
         private static void RegisterWithIoCContainer(IServiceCollection services)
         {
-            services.AddTransient<ICalculator, Calculator>();
             services.AddTransient<IOperation, AddOperation>();
-            services.AddTransient<IStringParser, UnlimitedNumberParser>();
+            services.AddTransient<IStringParser, CustomDelimiterSingleCharacter>();
+            services.AddTransient<ICalculator, Calculator>();
         }
     }
 }
