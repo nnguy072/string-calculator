@@ -7,7 +7,7 @@
     class Program
     {
         private const string WelcomePrompt = "Welcome to the string calculator. The operations this calcalutor current supports are: adding.";
-        private const string InputPrompt = "Enter comma-separated integers. (e.g. 20; 1,5000)";
+        private const string InputPrompt = "Enter comma-separated integers. (e.g. 20; 1,500; 1,23,24)";
         private const string ResultPrompt = "The result is: ";
 
         static void Main(string[] _)

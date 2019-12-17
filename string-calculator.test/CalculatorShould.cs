@@ -13,14 +13,14 @@ namespace string_calculator.test
         [Fact]
         public void AddTwoNumbers()
         {
-            var testInput = "1,5000";
+            var testInput = "1,500";
 
             try
             {
                 var parsedNumbers = new TwoNumberParser().Parse(testInput);
                 var result = new AddOperation().Evaluate(parsedNumbers);
 
-                Assert.Equal(5001, result);
+                Assert.Equal(501, result);
             }
             catch (Exception)
             {
@@ -83,7 +83,7 @@ namespace string_calculator.test
         }
 
         [Fact]
-        public void ConvertInvalidNumbersToZero()
+        public void ConvertNonNumbersToZero()
         {
             var testInput = "5,tyty";
             var testInput2 = "tyty,5";
@@ -207,6 +207,26 @@ namespace string_calculator.test
             catch (Exception)
             {
                 Assert.True(false);
+            }
+        }
+        #endregion
+
+        #region -- step 5 --
+        [Fact]
+        public void ConvertNumbersGreaterThan1000ToZero()
+        {
+            var testInput = "2,1001,6";
+
+            try
+            {
+                var parsedNumbers = new UnlimitedNumberParser().Parse(testInput);
+                var result = new AddOperation().Evaluate(parsedNumbers);
+
+                Assert.Equal(8, result);
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
         #endregion
