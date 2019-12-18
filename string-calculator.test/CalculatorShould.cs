@@ -248,5 +248,25 @@ namespace string_calculator.test
             }
         }
         #endregion
+
+        #region -- step 8 --
+        [Fact]
+        public void SupportMultipleCustomDelimiterOfAnyLength()
+        {
+            var testInput = "//[*][!!][r9r]\n11r9r22*hh*33!!44";
+
+            try
+            {
+                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as Calculator;
+                var result = calculator.Calculate(testInput);
+
+                Assert.Equal(110, result);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        #endregion
     }
 }

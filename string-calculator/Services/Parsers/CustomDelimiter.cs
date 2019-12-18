@@ -20,9 +20,8 @@
             var negativeNumbers = new List<int>();
             var delimiters = new List<string> { DefaultDelimiter, NewLineDelimiter };
 
-            var customDelimiter = ParseDelimiter(stringToParse, out var stringToParseWithoutDelimiter);
-            if (!string.IsNullOrWhiteSpace(customDelimiter))
-                delimiters.Add(customDelimiter);
+            var customDelimiters = ParseDelimiter(stringToParse, out var stringToParseWithoutDelimiter);
+            delimiters.AddRange(customDelimiters);
 
             var parsedNumbers = stringToParseWithoutDelimiter.Split(delimiters.ToArray(), StringSplitOptions.None)
                                                              .Select(o =>
@@ -42,28 +41,32 @@
             return parsedNumbers;
         }
 
-        private string ParseDelimiter(string stringToParse, out string stringToParseWithoutDelimiter)
+        private List<string> ParseDelimiter(string stringToParse, out string stringToParseWithoutDelimiter)
         {
-            var delimiter = ParseSingleCharacterDelimiter(stringToParse, out var updatedStringForSingleChar);
+            var delimiters = new List<string>();
 
-            if (!string.IsNullOrWhiteSpace(delimiter))
+            var singleCharDelimiter = ParseSingleCharacterDelimiter(stringToParse, out var updatedStringForSingleChar);
+
+            if (!string.IsNullOrWhiteSpace(singleCharDelimiter))
             {
                 stringToParseWithoutDelimiter = updatedStringForSingleChar;
-                return delimiter;
+                delimiters.Add(singleCharDelimiter);
+
+                return delimiters;
             }
             else
             {
-                delimiter = ParseAnyLengthDelimiter(stringToParse, out var updatedStringForAnyLength);
+                delimiters.AddRange(ParseAnyLengthDelimiter(stringToParse, out var updatedStringForAnyLength));
 
-                if (!string.IsNullOrWhiteSpace(delimiter))
+                if (delimiters.Count > 0)
                 {
                     stringToParseWithoutDelimiter = updatedStringForAnyLength;
-                    return delimiter;
+                    return delimiters;
                 }
                 else
                 {
                     stringToParseWithoutDelimiter = stringToParse;
-                    return "";
+                    return delimiters;
                 }
             }
         }
@@ -88,23 +91,31 @@
             }
         }
 
-        private string ParseAnyLengthDelimiter(string stringToParse, out string stringToParseWithoutDelimiter)
+        private List<string> ParseAnyLengthDelimiter(string stringToParse, out string stringToParseWithoutDelimiter)
         {
+            var delimiters = new List<string>();
+
             // \A   == starts with 
-            // (.*) == characters
+            // (.*?) == characters
             // \n   == newline
-            var regex = new Regex(@"\A//\[(.*)\]\n");
+            var regex = new Regex(@"\A//(\[.*?\])+\n");
             var match = regex.Match(stringToParse);
 
             if (match.Success)
             {
                 stringToParseWithoutDelimiter = regex.Replace(stringToParse, "");
-                return match.Groups[1].Value;  // want the 3rd next bc 3rd character is the delimiter. e.g. //[<delimiter>]\n
+
+                var test = match.Groups[0].Value;
+                var matches = Regex.Matches(test, @"\[(.*?)\]");
+
+                delimiters.AddRange(matches.Select(o => o.Groups[1].Value).ToList());
+
+                return delimiters;
             }
             else
             {
                 stringToParseWithoutDelimiter = stringToParse;
-                return "";
+                return delimiters;
             }
         }
     }
