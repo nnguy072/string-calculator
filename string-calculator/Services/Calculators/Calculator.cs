@@ -1,4 +1,4 @@
-﻿namespace string_calculator.Services
+﻿namespace string_calculator.Services.Calculators
 {
     public class Calculator : ICalculator
     {

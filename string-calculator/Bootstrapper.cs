@@ -2,6 +2,7 @@
 {
     using Microsoft.Extensions.DependencyInjection;
     using string_calculator.Services;
+    using string_calculator.Services.Calculators;
     using string_calculator.Services.Operations;
     using string_calculator.Services.Parsers;
     using System;
