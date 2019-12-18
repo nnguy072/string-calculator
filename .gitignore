@@ -13,11 +13,6 @@ out
 
 logs
 
-Prime.CompanyUsers.Web/logs
-Prime.CompanyUsers.Web/logs/*.*
-Prime.CompanyUsers.Web/out
-Prime.CompanyUsers.Web/out/*.*
-
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
@@ -252,4 +247,3 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
-/Prime.CompanyUsers/Prime.CompanyUsers.Web/logs
