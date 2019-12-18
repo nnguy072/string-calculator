@@ -95,10 +95,10 @@
         {
             var delimiters = new List<string>();
 
-            // \A   == starts with 
-            // (.*?) == characters
-            // \n   == newline
-            var regex = new Regex(@"\A//(\[.*?\])+\n");
+            // \A    == starts with 
+            // (.*?) == any characters
+            // \n    == newline
+            var regex = new Regex(@"\A//(\[.*?\])+\n"); // this should give us back //[<delimiter]*
             var match = regex.Match(stringToParse);
 
             if (match.Success)
@@ -106,7 +106,7 @@
                 stringToParseWithoutDelimiter = regex.Replace(stringToParse, "");
 
                 var test = match.Groups[0].Value;
-                var matches = Regex.Matches(test, @"\[(.*?)\]");
+                var matches = Regex.Matches(test, @"\[(.*?)\]");    // this should give us everything that is in this format: [*]
 
                 delimiters.AddRange(matches.Select(o => o.Groups[1].Value).ToList());
 

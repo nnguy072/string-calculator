@@ -12,7 +12,7 @@
 
         static void Main(string[] _)
         {
-            var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as Calculator;
+            var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as ICalculator;
 
             Console.WriteLine(WelcomePrompt);
 

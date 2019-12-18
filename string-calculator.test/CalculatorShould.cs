@@ -17,7 +17,7 @@ namespace string_calculator.test
 
             try
             {
-                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as Calculator;
+                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as ICalculator;
                 var result = calculator.Calculate(testInput);
 
                 Assert.Equal(501, result);
@@ -35,7 +35,7 @@ namespace string_calculator.test
 
             try
             {
-                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as Calculator;
+                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as ICalculator;
                 var result = calculator.Calculate(testInput);
 
                 Assert.Equal(4, result);
@@ -53,7 +53,7 @@ namespace string_calculator.test
 
             try
             {
-                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as Calculator;
+                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as ICalculator;
                 var result = calculator.Calculate(testInput);
 
                 Assert.Equal(0, result);
@@ -72,7 +72,7 @@ namespace string_calculator.test
 
             try
             {
-                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as Calculator;
+                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as ICalculator;
                 var result = calculator.Calculate(testInput);
                 var result2 = calculator.Calculate(testInput2);
 
@@ -93,7 +93,7 @@ namespace string_calculator.test
 
             try
             {
-                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as Calculator;
+                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as ICalculator;
                 var result = calculator.Calculate(testInput);
                 var result2 = calculator.Calculate(testInput2);
 
@@ -115,7 +115,7 @@ namespace string_calculator.test
 
             try
             {
-                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as Calculator;
+                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as ICalculator;
                 var result = calculator.Calculate(testInput);
 
                 Assert.Equal(78, result);
@@ -135,7 +135,7 @@ namespace string_calculator.test
 
             try
             {
-                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as Calculator;
+                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as ICalculator;
                 var result = calculator.Calculate(testInput);
 
                 Assert.Equal(6, result);
@@ -153,7 +153,7 @@ namespace string_calculator.test
 
             try
             {
-                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as Calculator;
+                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as ICalculator;
                 var result = calculator.Calculate(testInput);
 
                 Assert.Equal(0, result);
@@ -173,7 +173,7 @@ namespace string_calculator.test
 
             try
             {
-                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as Calculator;
+                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as ICalculator;
                 var result = calculator.Calculate(testInput);
 
                 Assert.True(false);
@@ -197,7 +197,7 @@ namespace string_calculator.test
 
             try
             {
-                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as Calculator;
+                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as ICalculator;
                 var result = calculator.Calculate(testInput);
 
                 Assert.Equal(8, result);
@@ -217,7 +217,7 @@ namespace string_calculator.test
 
             try
             {
-                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as Calculator;
+                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as ICalculator;
                 var result = calculator.Calculate(testInput);
 
                 Assert.Equal(7, result);
@@ -237,7 +237,7 @@ namespace string_calculator.test
 
             try
             {
-                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as Calculator;
+                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as ICalculator;
                 var result = calculator.Calculate(testInput);
 
                 Assert.Equal(66, result);
@@ -257,7 +257,7 @@ namespace string_calculator.test
 
             try
             {
-                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as Calculator;
+                var calculator = Bootstrapper.ServiceProvider.GetService(typeof(ICalculator)) as ICalculator;
                 var result = calculator.Calculate(testInput);
 
                 Assert.Equal(110, result);
